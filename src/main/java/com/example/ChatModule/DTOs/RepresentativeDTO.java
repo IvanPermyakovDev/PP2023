@@ -17,7 +17,7 @@ import java.util.List;
 public class RepresentativeDTO {
     @NotNull
     @Min(1)
-    private int id;
+    private long id;
     @NotBlank
     private String firstname;
     @NotBlank

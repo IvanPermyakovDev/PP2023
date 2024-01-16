@@ -53,12 +53,10 @@ public class Graduate {
     @Setter
     @Column(name = "living_region")
     private String region;
-    @Column(name="salt")
+    @Column(name = "salt")
     private String salt;
-//    @Transient
-//    private List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-    @Transient
-    private List<Role> role = new ArrayList<Role>();
+    @Enumerated
+    private Role role;
     private void generateSalt(){
         if (this.salt==null)
             this.salt=BCrypt.gensalt();
@@ -69,8 +67,7 @@ public class Graduate {
         this.password=password;
     }
 
-    public List<Role> getRoles(){
-        role.add(new Role("ROLE_GRAD")) ;
-       return role;
+    public void setRole() {
+        this.role = Role.ROLE_GRAD;
     }
 }

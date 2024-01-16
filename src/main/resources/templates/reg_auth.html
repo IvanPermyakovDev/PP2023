@@ -12,23 +12,24 @@
             <div class="div">
                 <div class="text-wrapper">Вход</div>
 
-                <form class="frame-4" action="/auth/grad" method="post" enctype="multipart/form-data">
+                <form th:action="@{/login}" class="frame-4"  method="post" enctype="multipart/form-data">
 
                     <div class="frame-5">
                         <input class="mail-input input" id="login" type="email" placeholder="E-mail" required
-                               name="login">
+                               name="username">
                     </div>
                     <div class="frame-5">
                         <input class="mail-input input password-input" id="password" type="password"
                                placeholder="Password" required maxlength="32" minlength="8" name="password">
                     </div>
+                </form>
             </div>
             <div class="frame-2">
                 <a class="sign-up-btn sub-btn href" href="URL">Регистрация</a>
                 <button class="sign-in-btn sub-btn" type="submit">Войти</button>
             </div>
             <!--       <div class="frame-7 btn"><div class="text-wrapper-4">Зарегистрироваться</div></div> -->
-            </form>
+
         </div>
     </div>
     <footer class="footer">

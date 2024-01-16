@@ -1,23 +1,21 @@
 package com.example.ChatModule.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
-public class Role implements GrantedAuthority {
-    private String name;
+@Getter
+public enum Role implements GrantedAuthority {
+    ROLE_GRAD, ROLE_REP, ROLE_ADMIN;
     @Override
-    public String getAuthority(){ return this.name; }
+    public String getAuthority(){ return name(); }
     @Override
     public String toString(){
-        return name;
+        return name();
     }
 }

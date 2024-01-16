@@ -14,6 +14,7 @@ public class AdminService {
 
     public boolean registerAdmin(@Valid AdminAuthRegDTO dto){
         Admin admin = new Admin(dto.getName(), dto.getPassword());
+        admin.setRole();
         repo.save(admin);
         return namePresent(dto.getName());
     }

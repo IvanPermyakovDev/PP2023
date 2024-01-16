@@ -56,6 +56,11 @@
             <div class="file-block table">
                 <div class="table-block-name">
                     <p class="table-block-name-p">Документы</p>
+                    <form action="/doc" method="post" enctype="multipart/form-data">
+                        <input type="file" name="content" id="content">
+                        <input type="hidden" th:value="${grad.getId()}" name="graduateId">
+                        <input type="submit" value="Загрузить файл" name="submit">
+                    </form>
                 </div>
                 <div class="table-body files-table" >
                     <!-- Это для наглядности накакано -->
@@ -69,6 +74,9 @@
 
                                 "th:href="${document.getLink()}">
                             <span th:text="${document.getName()}" style = "padding-left: 20px; line-height: 60px;"></span></a>
+
+                            <img src="../img/x.png" class="x-btn">
+
                     </div>
                 </div>
             </div>
@@ -121,5 +129,12 @@
         console.log("im working!")
     })
 </script>
+<!--    <script>-->
+<!--        document.addEventListener('DOMContentLoaded', function() {-->
+<!--            document.querySelector('form').addEventListener('submit', function(event) {-->
+<!--                event.preventDefault();-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
 </body>
 </html>

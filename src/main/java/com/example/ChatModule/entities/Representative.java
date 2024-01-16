@@ -19,7 +19,7 @@ public class Representative {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rep_id")
-    private int id;
+    private long id;
     @Setter
     @Column(name = "rep_login")
     private String login;
@@ -43,8 +43,8 @@ public class Representative {
     private List<EduProgram> eduPrograms;
     @Column(name="salt")
     private String salt;
-    @Transient
-    private List<Role> role = new ArrayList<Role>();
+    @Enumerated
+    private Role role;
 
     private void generateSalt(){
         if (this.salt==null)
@@ -56,9 +56,8 @@ public class Representative {
         this.password=password;
     }
 
-    public List<Role> getRoles(){
-        role.add(new Role("ROLE_REP")) ;
-        return role;
+    public void setRole() {
+        this.role = Role.ROLE_REP;
     }
 
     public void addEP(EduProgram ep){

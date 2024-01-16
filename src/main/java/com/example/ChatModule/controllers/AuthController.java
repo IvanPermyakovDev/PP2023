@@ -72,13 +72,13 @@ public class AuthController {
         return authService.createRepAuthToken(dto);
     }
 
-    @PostMapping("/auth/grad")
-    public String createGradAuthToken(@RequestParam String login, @RequestParam String password) {
+    @PostMapping("/login")
+    public String createGradAuthToken(@RequestParam String username, @RequestParam String password) {
 //        ResponseEntity<JwtResponse> token = authService.createGradAuthToken(dto);
 //        RedirectView redirectView = new RedirectView();
 //        redirectView.setUrl("/grad_lk");
 //        return redirectView;
-        authService.createGradAuthToken(new GraduateAuthDTO(login, password));
+        authService.createGradAuthToken(new GraduateAuthDTO(username, password));
         return "/grad_lk";
     }
 

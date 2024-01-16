@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,9 +34,9 @@ public class DocumentController {
     }
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<HttpStatus> addFile(@RequestPart("content")MultipartFile file,
-                        @RequestParam("name") String name,
-                        @RequestParam("graduateId") long graduateId){
+                                @RequestParam("graduateId") long graduateId){
         try {
+            String name = file.getOriginalFilename();
             byte[] content = file.getBytes();
             DocumentDTO dto = new DocumentDTO(content,name,graduateId);
             service.createDocument(dto);

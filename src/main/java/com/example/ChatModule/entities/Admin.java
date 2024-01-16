@@ -25,13 +25,10 @@ public class Admin {
 
     @Column(name = "salt")
     private String salt;
-    @Transient
-    private List<Role> role = new ArrayList<Role>();
 
-    public List<Role> getRoles(){
-        role.add(new Role("ROLE_ADMIN")) ;
-        return role;
-    }
+    @Enumerated
+    private Role role;
+
 
     private void generateSalt(){
         if (this.salt==null)
@@ -47,5 +44,9 @@ public class Admin {
     public Admin(String name, String password){
         this.name = name;
         setPassword(password);
+    }
+
+    public void setRole() {
+        this.role = Role.ROLE_ADMIN;
     }
 }

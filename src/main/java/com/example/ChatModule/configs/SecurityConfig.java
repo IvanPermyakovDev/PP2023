@@ -17,8 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -29,17 +27,14 @@ public class SecurityConfig {
     private JwtRequestFilter jwtRequestFilter;
     @Autowired
     private LogoutService logoutService;
-//    @Autowired
-//    private AuthenticationManagerImpl authManager;
     @Bean
     public SecurityFilterChain filterchian(HttpSecurity http) throws Exception{
         http
-                .httpBasic(withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
 
-//                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
-//                        .loginPage("/sign").permitAll())
+                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
+                   .loginPage("/sign").permitAll())
 
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/register/**").anonymous()
@@ -55,12 +50,12 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
 
                 )
-                //.authenticationProvider(daoAuthenticationProvider())
+                .authenticationProvider(daoAuthenticationProvider())
 
-//                .exceptionHandling(exceptionHandling -> exceptionHandling
-//                        .authenticationEntryPoint((request, response, authException) ->
-//                                response.sendRedirect("/sign"))
-//                )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint((request, response, authException) ->
+                                response.sendRedirect("/sign"))
+                )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 

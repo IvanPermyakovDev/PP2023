@@ -34,6 +34,7 @@ public class GraduateService {
         grad.setDateOfBirth(LocalDate.parse(dto.getDateOfBirth(),formatter));
         grad.setGradFrom(dto.getGradFrom());
         grad.setRegion(dto.getRegion());
+        grad.setRole();
         repo.save(grad);
         return mailPresent(dto.getMail());
     }

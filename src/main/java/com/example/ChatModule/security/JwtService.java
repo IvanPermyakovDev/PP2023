@@ -24,6 +24,7 @@ public class JwtService {
     private Duration jwtLifetime;
 
     public Claims getAllClaimsFromToken(String token) {
+        System.out.println(token);
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
@@ -35,20 +36,34 @@ public class JwtService {
     }
 
     public List<String> getRoles(String token) {
-        return getAllClaimsFromToken(token).get("roles", List.class);
+        return getAllClaimsFromToken(token).get("role", List.class);
     }
 
     public String generateToken(UserDetails userDetails) {
         Date issuedDate = new Date();
         Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
         String role = userDetails.getAuthorities().toArray()[0].toString();
+        String name = userDetails.getUsername();
 
         String token = JWT.create()
                 .withSubject(userDetails.getUsername())
                 .withIssuedAt(issuedDate)
                 .withExpiresAt(expiredDate)
+                .withClaim("name", name)
                 .withClaim("role", role)
                 .sign(Algorithm.HMAC512(secret));
         return token;
     }
+
+//    public String getUsername(String token) {
+//        if (token == null) return "";
+//        return JWT.decode(token).getClaim("name").asString();
+//    }
+//
+//    public List<String> getRoles(String token) {
+//        List<String> roleList = new ArrayList<String>();
+//        roleList.add(JWT.decode(token).getClaim("role").asString());
+//        return roleList;
+//    }
+
 }

@@ -7,9 +7,7 @@ spring:
   config:
     activate:
       on-profile: dev
-  security:
-    basic:
-      enabled: false
+
 
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=ChatModule;encrypt=false
@@ -62,4 +60,10 @@ spring:
 
 jwt:
   secret: 984hg493gh0439rthr0429uruj2309yh937gc763fe87t3f89723gf
-  lifetime: 1h
+  lifetime: 3m
+
+springdoc:
+  show-actuator: false
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

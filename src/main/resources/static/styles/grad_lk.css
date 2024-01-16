@@ -216,6 +216,12 @@ footer {
     }
 }
 
+.x-btn{
+    width: 15px;
+    height: 15px;
+    margin-left: auto;
+}
+
 .shit-2-par-wrapper {
     display: grid;
     grid-template-columns: 150px 350px;
